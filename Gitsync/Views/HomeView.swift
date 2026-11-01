@@ -8,6 +8,8 @@ struct HomeView: View {
     @State private var isLoadingRepos = false
     @State private var selectedRepo: Repository?
     @State private var loadError: String?
+    @State private var repoToDelete: Repository?
+    @State private var showDeleteConfirm = false
 
     var body: some View {
         NavigationStack {
@@ -86,6 +88,14 @@ struct HomeView: View {
                                     }
                                 }
                             }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                Button(role: .destructive) {
+                                    repoToDelete = repo
+                                    showDeleteConfirm = true
+                                } label: {
+                                    Label("Hapus", systemImage: "trash")
+                                }
+                            }
                         }
                     }
                 } header: {
@@ -119,6 +129,16 @@ struct HomeView: View {
                 PushView(preselectedRepo: selectedRepo)
                     .onDisappear { selectedRepo = nil }
             }
+            .confirmationDialog(
+                "Hapus repo \(repoToDelete?.fullName ?? "")?\nTindakan ini tidak bisa dibatalkan.",
+                isPresented: $showDeleteConfirm,
+                titleVisibility: .visible
+            ) {
+                Button("Hapus Permanen", role: .destructive) {
+                    Task { await deleteRepo() }
+                }
+                Button("Batal", role: .cancel) {}
+            }
             .task {
                 await loadRepos()
             }
@@ -135,5 +155,18 @@ struct HomeView: View {
         } catch {
             loadError = error.localizedDescription
         }
+    }
+
+    private func deleteRepo() async {
+        guard let token = auth.currentToken,
+              let repo = repoToDelete else { return }
+        let owner = repo.fullName.split(separator: "/").first.map(String.init) ?? ""
+        do {
+            try await GitHubService.shared.deleteRepo(token: token, owner: owner, repo: repo.name)
+            repos.removeAll { $0.id == repo.id }
+        } catch {
+            loadError = "Gagal hapus: \(error.localizedDescription)"
+        }
+        repoToDelete = nil
     }
 }
