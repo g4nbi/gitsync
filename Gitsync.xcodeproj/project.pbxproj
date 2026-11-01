@@ -1,0 +1,297 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1B2C3D4E5F60718293A4B5C /* GitsyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C2D3E4F5061728394A5B6C /* GitsyncApp.swift */; };
+		A2B3C4D5E6F708192A3B4C5D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F60718293A4B5C6D /* ContentView.swift */; };
+		A3B4C5D6E7F8091A2B3C4D5E /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4D5E6F708192A3B4C5D6E /* Models.swift */; };
+		A4B5C6D7E8F90A1B2C3D4E5F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C5D6E7F8091A2B3C4D5E6F /* AuthService.swift */; };
+		A5B6C7D8E9F0A1B2C3D4E5F6 /* GitHubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C6D7E8F90A1B2C3D4E5F60 /* GitHubService.swift */; };
+		A6B7C8D9E0F1A2B3C4D5E6F7 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C7D8E9F0A1B2C3D4E5F617 /* KeychainService.swift */; };
+		A7B8C9D0E1F2A3B4C5D6E7F8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C8D9E0F1A2B3C4D5E6F728 /* LoginView.swift */; };
+		A8B9C0D1E2F3A4B5C6D7E8F9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C9D0E1F2A3B4C5D6E7F839 /* HomeView.swift */; };
+		A9B0C1D2E3F4A5B6C7D8E9F0 /* CreateRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C0D1E2F3A4B5C6D7E8F94A /* CreateRepoView.swift */; };
+		A0B1C2D3E4F5A6B7C8D9E0F1 /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C1D2E3F4A5B6C7D8E9F05B /* PushView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C0D1E2F3A4B5C6D7E8F9A0B1 /* Gitsync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gitsync.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1C2D3E4F5061728394A5B6C /* GitsyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitsyncApp.swift; sourceTree = "<group>"; };
+		B2C3D4E5F60718293A4B5C6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B3C4D5E6F708192A3B4C5D6E /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		B4C5D6E7F8091A2B3C4D5E6F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		B5C6D7E8F90A1B2C3D4E5F60 /* GitHubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubService.swift; sourceTree = "<group>"; };
+		B6C7D8E9F0A1B2C3D4E5F617 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		B7C8D9E0F1A2B3C4D5E6F728 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B8C9D0E1F2A3B4C5D6E7F839 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B9C0D1E2F3A4B5C6D7E8F94A /* CreateRepoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRepoView.swift; sourceTree = "<group>"; };
+		B0C1D2E3F4A5B6C7D8E9F05B /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D1E2F3A4B5C6D7E8F9A0B1C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E1F2A3B4C5D6E7F8A9B0C1D2 = {
+			isa = PBXGroup;
+			children = (
+				F1A2B3C4D5E6F7A8B9C0D1E2 /* Gitsync */,
+				E2F3A4B5C6D7E8F9A0B1C2D3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E2F3A4B5C6D7E8F9A0B1C2D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C0D1E2F3A4B5C6D7E8F9A0B1 /* Gitsync.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1A2B3C4D5E6F7A8B9C0D1E2 /* Gitsync */ = {
+			isa = PBXGroup;
+			children = (
+				B1C2D3E4F5061728394A5B6C /* GitsyncApp.swift */,
+				B2C3D4E5F60718293A4B5C6D /* ContentView.swift */,
+				F2A3B4C5D6E7F8A9B0C1D2E3 /* Models */,
+				F3A4B5C6D7E8F9A0B1C2D3E4 /* Services */,
+				F4A5B6C7D8E9F0A1B2C3D4E5 /* Views */,
+			);
+			path = Gitsync;
+			sourceTree = "<group>";
+		};
+		F2A3B4C5D6E7F8A9B0C1D2E3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B3C4D5E6F708192A3B4C5D6E /* Models.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F3A4B5C6D7E8F9A0B1C2D3E4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B4C5D6E7F8091A2B3C4D5E6F /* AuthService.swift */,
+				B5C6D7E8F90A1B2C3D4E5F60 /* GitHubService.swift */,
+				B6C7D8E9F0A1B2C3D4E5F617 /* KeychainService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F4A5B6C7D8E9F0A1B2C3D4E5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B7C8D9E0F1A2B3C4D5E6F728 /* LoginView.swift */,
+				B8C9D0E1F2A3B4C5D6E7F839 /* HomeView.swift */,
+				B9C0D1E2F3A4B5C6D7E8F94A /* CreateRepoView.swift */,
+				B0C1D2E3F4A5B6C7D8E9F05B /* PushView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C8D0825BFEFD45B4ADAFE68D /* Gitsync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CB3B5D7C2214E20AB95E270 /* Build configuration list for PBXNativeTarget "Gitsync" */;
+			buildPhases = (
+				1EE4FB1AEE954281A328DC22 /* Sources */,
+				D1E2F3A4B5C6D7E8F9A0B1C2 /* Frameworks */,
+				BA0360D6E9534E9294983C31 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Gitsync;
+			productName = Gitsync;
+			productReference = C0D1E2F3A4B5C6D7E8F9A0B1 /* Gitsync.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8F8558EA1ED24B178D1987EB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					C8D0825BFEFD45B4ADAFE68D = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = CC335A6094384D37B8980802 /* Build configuration list for PBXProject "Gitsync" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E1F2A3B4C5D6E7F8A9B0C1D2;
+			productRefGroup = E2F3A4B5C6D7E8F9A0B1C2D3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C8D0825BFEFD45B4ADAFE68D /* Gitsync */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BA0360D6E9534E9294983C31 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1EE4FB1AEE954281A328DC22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3D4E5F60718293A4B5C /* GitsyncApp.swift in Sources */,
+				A2B3C4D5E6F708192A3B4C5D /* ContentView.swift in Sources */,
+				A3B4C5D6E7F8091A2B3C4D5E /* Models.swift in Sources */,
+				A4B5C6D7E8F90A1B2C3D4E5F /* AuthService.swift in Sources */,
+				A5B6C7D8E9F0A1B2C3D4E5F6 /* GitHubService.swift in Sources */,
+				A6B7C8D9E0F1A2B3C4D5E6F7 /* KeychainService.swift in Sources */,
+				A7B8C9D0E1F2A3B4C5D6E7F8 /* LoginView.swift in Sources */,
+				A8B9C0D1E2F3A4B5C6D7E8F9 /* HomeView.swift in Sources */,
+				A9B0C1D2E3F4A5B6C7D8E9F0 /* CreateRepoView.swift in Sources */,
+				A0B1C2D3E4F5A6B7C8D9E0F1 /* PushView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5E7CFC7288A348648E70FB64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EC2C7CC7C3A841A9A330F6D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9DF446DF73E34AC4867ED6F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Gitsync;
+				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.gitsync;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		527059706BCA4D66A587288F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Gitsync;
+				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.gitsync;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CC335A6094384D37B8980802 /* Build configuration list for PBXProject "Gitsync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E7CFC7288A348648E70FB64 /* Debug */,
+				EC2C7CC7C3A841A9A330F6D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CB3B5D7C2214E20AB95E270 /* Build configuration list for PBXNativeTarget "Gitsync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9DF446DF73E34AC4867ED6F8 /* Debug */,
+				527059706BCA4D66A587288F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8F8558EA1ED24B178D1987EB /* Project object */;
+}
