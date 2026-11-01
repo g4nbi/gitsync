@@ -19,7 +19,7 @@ actor GitHubService {
         req.setValue("2022-11-28", forHTTPHeaderField: "X-GitHub-Api-Version")
 
         let (data, response) = try await URLSession.shared.data(for: req)
-        try check(response)
+        try check(response, data: data)
         return try decoder.decode(GitHubUser.self, from: data)
     }
 
@@ -31,7 +31,7 @@ actor GitHubService {
         req.setValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
 
         let (data, response) = try await URLSession.shared.data(for: req)
-        try check(response)
+        try check(response, data: data)
         return try decoder.decode([Repository].self, from: data)
     }
 
@@ -51,8 +51,18 @@ actor GitHubService {
         req.httpBody = try JSONEncoder().encode(body)
 
         let (data, response) = try await URLSession.shared.data(for: req)
-        try check(response)
+        try check(response, data: data)
         return try decoder.decode(Repository.self, from: data)
+    }
+
+    func deleteRepo(token: String, owner: String, repo: String) async throws {
+        var req = URLRequest(url: URL(string: "\(base)/repos/\(owner)/\(repo)")!)
+        req.httpMethod = "DELETE"
+        req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        req.setValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
+
+        let (data, response) = try await URLSession.shared.data(for: req)
+        try check(response, data: data)
     }
 
     // MARK: - Push multiple files (Git Data API)
@@ -72,7 +82,7 @@ actor GitHubService {
         refReq.setValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
 
         let (refData, refResp) = try await URLSession.shared.data(for: refReq)
-        try check(refResp)
+        try check(refResp, data: refData)
         let ref = try decoder.decode(RefResponse.self, from: refData)
         let parentSHA = ref.object.sha
 
@@ -88,7 +98,7 @@ actor GitHubService {
             ))
         }
 
-        // 3. Create tree
+        // 3. Create tree (based on current so we keep existing files + add/overwrite)
         let treeSHA = try await createTree(
             token: token,
             owner: owner,
@@ -133,7 +143,7 @@ actor GitHubService {
         req.httpBody = try JSONEncoder().encode(body)
 
         let (data, response) = try await URLSession.shared.data(for: req)
-        try check(response)
+        try check(response, data: data)
         let blob = try decoder.decode(BlobResponse.self, from: data)
         return blob.sha
     }
@@ -155,7 +165,7 @@ actor GitHubService {
         req.httpBody = try JSONEncoder().encode(body)
 
         let (data, response) = try await URLSession.shared.data(for: req)
-        try check(response)
+        try check(response, data: data)
         let tree = try decoder.decode(TreeResponse.self, from: data)
         return tree.sha
     }
@@ -182,7 +192,7 @@ actor GitHubService {
         req.httpBody = try JSONEncoder().encode(body)
 
         let (data, response) = try await URLSession.shared.data(for: req)
-        try check(response)
+        try check(response, data: data)
         let commit = try decoder.decode(CommitResponse.self, from: data)
         return commit.sha
     }
@@ -203,11 +213,11 @@ actor GitHubService {
         let body = UpdateRefRequest(sha: sha)
         req.httpBody = try JSONEncoder().encode(body)
 
-        let (_, response) = try await URLSession.shared.data(for: req)
-        try check(response)
+        let (data, response) = try await URLSession.shared.data(for: req)
+        try check(response, data: data)
     }
 
-    private func check(_ response: URLResponse) throws {
+    private func check(_ response: URLResponse, data: Data) throws {
         guard let http = response as? HTTPURLResponse else {
             throw GitHubError.invalidResponse
         }
@@ -216,25 +226,34 @@ actor GitHubService {
         case 401: throw GitHubError.unauthorized
         case 403: throw GitHubError.forbidden
         case 404: throw GitHubError.notFound
-        case 422: throw GitHubError.validationFailed
-        default: throw GitHubError.http(http.statusCode)
+        case 422:
+            if let msg = String(data: data, encoding: .utf8) {
+                throw GitHubError.apiMessage(msg)
+            }
+            throw GitHubError.validationFailed
+        default:
+            if let msg = String(data: data, encoding: .utf8), !msg.isEmpty {
+                throw GitHubError.apiMessage("HTTP \(http.statusCode): \(msg)")
+            }
+            throw GitHubError.http(http.statusCode)
         }
     }
 }
 
 enum GitHubError: LocalizedError {
-    case invalidResponse, unauthorized, forbidden, notFound, validationFailed, http(Int), noToken, emptyFiles
+    case invalidResponse, unauthorized, forbidden, notFound, validationFailed, http(Int), noToken, emptyFiles, apiMessage(String)
 
     var errorDescription: String? {
         switch self {
         case .invalidResponse: return "Response tidak valid"
         case .unauthorized: return "Token tidak valid / expired"
-        case .forbidden: return "Akses ditolak (cek scope token)"
+        case .forbidden: return "Akses ditolak (cek scope token: repo + delete_repo)"
         case .notFound: return "Repo atau branch tidak ditemukan"
         case .validationFailed: return "Validasi gagal (nama repo sudah ada?)"
         case .http(let code): return "HTTP \(code)"
         case .noToken: return "Belum login"
         case .emptyFiles: return "Tidak ada file untuk di-push"
+        case .apiMessage(let msg): return msg
         }
     }
 }
