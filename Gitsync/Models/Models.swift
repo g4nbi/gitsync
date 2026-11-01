@@ -84,4 +84,5 @@ struct FileItem: Identifiable, Hashable {
     let url: URL
     let relativePath: String
     let isDirectory: Bool
+    let rootFolderName: String?   // untuk opsi flatten folder
 }
