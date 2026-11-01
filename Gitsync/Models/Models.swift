@@ -5,11 +5,6 @@ struct GitHubUser: Codable, Identifiable {
     let login: String
     let name: String?
     let avatarUrl: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id, login, name
-        case avatarUrl = "avatar_url"
-    }
 }
 
 struct Repository: Codable, Identifiable, Hashable {
@@ -20,14 +15,6 @@ struct Repository: Codable, Identifiable, Hashable {
     let htmlUrl: String
     let defaultBranch: String
     let description: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, description
-        case `private`
-        case fullName = "full_name"
-        case htmlUrl = "html_url"
-        case defaultBranch = "default_branch"
-    }
 }
 
 struct CreateRepoRequest: Encodable {
@@ -51,8 +38,8 @@ struct BlobResponse: Codable {
 
 struct TreeEntry: Encodable {
     let path: String
-    let mode: String   // "100644"
-    let type: String   // "blob"
+    let mode: String
+    let type: String
     let sha: String
 }
 
