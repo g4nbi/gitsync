@@ -22,7 +22,8 @@ struct Repository: Codable, Identifiable, Hashable {
     let description: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, private, description
+        case id, name, description
+        case `private`
         case fullName = "full_name"
         case htmlUrl = "html_url"
         case defaultBranch = "default_branch"
@@ -36,7 +37,8 @@ struct CreateRepoRequest: Encodable {
     let autoInit: Bool
 
     enum CodingKeys: String, CodingKey {
-        case name, description, private
+        case name, description
+        case `private`
         case autoInit = "auto_init"
     }
 }
