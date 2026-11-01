@@ -7,6 +7,7 @@ struct HomeView: View {
     @State private var repos: [Repository] = []
     @State private var isLoadingRepos = false
     @State private var selectedRepo: Repository?
+    @State private var loadError: String?
 
     var body: some View {
         NavigationStack {
@@ -52,8 +53,12 @@ struct HomeView: View {
                     if isLoadingRepos {
                         ProgressView()
                             .frame(maxWidth: .infinity)
+                    } else if let loadError {
+                        Text(loadError)
+                            .foregroundStyle(.red)
+                            .font(.footnote)
                     } else if repos.isEmpty {
-                        Text("Belum ada repo atau gagal load")
+                        Text("Belum ada repo")
                             .foregroundStyle(.secondary)
                     } else {
                         ForEach(repos) { repo in
@@ -123,11 +128,12 @@ struct HomeView: View {
     private func loadRepos() async {
         guard let token = auth.currentToken else { return }
         isLoadingRepos = true
+        loadError = nil
         defer { isLoadingRepos = false }
         do {
             repos = try await GitHubService.shared.listRepos(token: token)
         } catch {
-            // silent
+            loadError = error.localizedDescription
         }
     }
 }
