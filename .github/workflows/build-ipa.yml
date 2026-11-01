@@ -14,20 +14,35 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer || sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
-
-      - name: Show Xcode version
-        run: xcodebuild -version
-
-      - name: Create Xcode project if needed (manual setup assumed)
         run: |
-          echo "This workflow expects a full Xcode project already present."
-          echo "If you only have the source folder, create the project in Xcode first then push."
-          ls -la
+          sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer || \
+          sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+          xcodebuild -version
 
-      - name: Build (unsigned)
+      - name: Check for Xcode project
         run: |
-          # Adjust scheme / project name if different
+          if [ ! -d "Gitsync.xcodeproj" ]; then
+            echo "❌ Gitsync.xcodeproj tidak ditemukan."
+            echo ""
+            echo "Langkah yang harus dilakukan sekali:"
+            echo "1. Buka Xcode di Mac"
+            echo "2. File → New → Project → App"
+            echo "   - Product Name: Gitsync"
+            echo "   - Interface: SwiftUI"
+            echo "   - Language: Swift"
+            echo "   - Minimum: iOS 17.0"
+            echo "3. Hapus ContentView.swift & GitsyncApp.swift bawaan"
+            echo "4. Drag semua file dari folder Gitsync/ ke project (Create groups)"
+            echo "5. Pastikan target membership benar"
+            echo "6. Commit & push Gitsync.xcodeproj + scheme"
+            echo "7. Jalankan workflow ini lagi"
+            exit 1
+          fi
+          ls -la Gitsync.xcodeproj
+
+      - name: Build archive (unsigned)
+        run: |
+          mkdir -p build
           xcodebuild \
             -project Gitsync.xcodeproj \
             -scheme Gitsync \
@@ -37,25 +52,26 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            archive || true
+            DEVELOPMENT_TEAM="" \
+            archive
 
-          # Fallback for pure source (user must open in Xcode once)
-          if [ ! -d build/Gitsync.xcarchive ]; then
-            echo "No archive produced. Please create Gitsync.xcodeproj in Xcode and re-run."
-            exit 0
-          fi
-
-      - name: Export IPA (unsigned)
+      - name: Create unsigned IPA
         run: |
-          mkdir -p Payload
-          if [ -d build/Gitsync.xcarchive/Products/Applications ]; then
-            cp -r build/Gitsync.xcarchive/Products/Applications/*.app Payload/
-            zip -r Gitsync-unsigned.ipa Payload
+          APP_PATH=$(find build/Gitsync.xcarchive/Products/Applications -name "*.app" | head -1)
+          if [ -z "$APP_PATH" ]; then
+            echo "❌ Tidak menemukan .app di archive"
+            ls -laR build/Gitsync.xcarchive || true
+            exit 1
           fi
+          echo "Found app: $APP_PATH"
+          mkdir -p Payload
+          cp -r "$APP_PATH" Payload/
+          zip -r Gitsync-unsigned.ipa Payload
+          ls -lh Gitsync-unsigned.ipa
 
-      - name: Upload IPA
+      - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
         with:
           name: Gitsync-unsigned-ipa
           path: Gitsync-unsigned.ipa
-          if-no-files-found: ignore
+          if-no-files-found: error
